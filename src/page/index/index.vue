@@ -3,7 +3,10 @@
     <header class="header">
       <div class="back iconfont">&#xe624;</div>
       <div class="search">
-        <a href="#" class="prompt">输入城市/景点、游玩</a>
+        <a href="#" class="prompt">
+          <i class="iconfont">&#xe60b;</i>
+          输入城市/景点/游玩主题
+        </a>
       </div>
       <div class="city">城市</div>
     </header>
@@ -15,7 +18,7 @@
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
-    <swiper :options="{}">
+    <swiper :options="iconOption" class="swiper">
       <swiper-slide v-for='(pageInfo, index) in pages' :key='index'>
         <div class="icon-wrapper">
           <div v-for='item in pageInfo' :key='item.id' class="icon-item">
@@ -26,6 +29,7 @@
           </div>
         </div>
       </swiper-slide>
+      <div class="swiper-pagination mpw-nav-dots"  slot="pagination"></div>
     </swiper>
     <ul class="mp-listitem">
       <li class="mp-listentrance mp-listentrance-left">
@@ -143,6 +147,13 @@
         hotlistInfo: [],
         productInfo: [],
         swiperOption: {
+          initialSlide: 1,
+          autoplay: 5000,
+          pagination: '.swiper-pagination',
+          loop: true
+        },
+        iconOption: {
+          initialSlide: 1,
           autoplay: 10000,
           pagination: '.swiper-pagination',
           loop: true
@@ -201,7 +212,10 @@
     border-radius: .1rem;
   }
   .prompt {
-    font-size: 0.26rem;color: #ccc;line-height: 0.6rem;
+    font-size: 0.26rem;
+    color: #ccc;
+    line-height: 0.6rem;
+    padding-left: 0.2rem;
   }
   .city {
     width: 1.14rem;
@@ -234,7 +248,7 @@
     box-sizing: border-box;
     float: left;
     width: 25%;
-    padding: 0.35rem;
+    padding: 0.25rem 0.35rem;
   }
   .icon-img-con {
     width:100%;
@@ -250,32 +264,62 @@
     display: block;
     text-align: center;
   }
+  .swiper{
+    height: 3.8rem;
+    background: #fff;
+  }
+  .mpw-nav-dots{
+    position: absolute;
+    width: 100%;
+    bottom: 0.05rem;
+  }
   .mp-listitem{
     height: 1.17rem;
     font-size: 0.28rem;
-    background: #f5f5f5;
+    background: #fff;
   }
   .mp-listentrance {
     width: 49.9%;
     height: 0.97rem;
     text-align: center;
     line-height: 0.97rem;
-    border-top: 0.01rem solid #ccc;
     float: left;
     color: #212121;
     background: #fff;
+  }
+  .mp-listentrance::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0.01rem;
+    background: #e0e0e0;
   }
   .mp-listentrance a{
     color: #212121;
   }
   .mp-listentrance-left{
-    border-right: 0.01rem solid #ccc;
+    border-right: 0.01rem solid #e0e0e0;
   }
   .mp-activity{
     height:1.4rem;
-    border-top: 0.01rem solid #ccc;
-    border-bottom: 0.01rem solid #ccc;
+    position: relative;
     background: #fff;
+  }
+  .mp-activity::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0.01rem;
+    background: #e0e0e0;
+  }
+  .mp-activity::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.01rem;
+    background: #e0e0e0;
   }
   .mp-activity-item{
     width: 49.9%;
@@ -283,7 +327,7 @@
     float: left;
   }
   .mp-activity-item-left{
-    border-right: 0.01rem solid #ccc;
+    border-right: 0.01rem solid #e0e0e0;
   }
   .mp-activity-img{
     width: 100%;
@@ -301,7 +345,16 @@
     overflow: hidden;
     height: 1.4rem;
     padding: .24rem;
-    border-bottom: 0.01rem solid #ccc;
+  }
+  .mp-hot-prod::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.01rem;
+    background: #e0e0e0;
+    transform: scaleY(.5);
   }
   .mp-hotlist-img{
     width: 1.4rem;
@@ -352,8 +405,8 @@
   }
   .mp-product-item{
     position: relative;
-    margin-bottom: 0.1rem;
     background: #fff;
+    border-bottom: 0.1rem solid #f5f5f5;
   }
   .product-imgcontainer{
     overflow: hidden;
